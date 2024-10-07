@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Envelope + Letter (Open/Close on Click)</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="envelope-wrapper">
+            <div class="envelope">
+                <div class="letter">
+                    <div class="text">
+                        <strong id="message"></strong>						
+						<img src="" id="image" alt="immagine del giorno">
+                    </div>
+                </div>
+            </div>
+            <div class="heart"></div>
+        </div>
+    </div>
+    <script>
+    // Ottieni la data corrente
+    const today = new Date();
+    const day = ("0" + today.getDate()).slice(-2);
+    const month = ("0" + (today.getMonth() + 1)).slice(-2); // I mesi partono da 0
+    const dateKey = `${day}/${month}`;
+	
+	
+
+    // Definisci i messaggi e le immagini per le date specifiche
+    const messages = {
+        "08/10": {
+            text: "Ich liebe dich", // "Ti voglio bene" in tedesco (austriaco)
+            image: "immagini/vienna.jpg"
+        },
+        "09/10": {
+            text: "Ti voglio bene", // Italiano
+            image: "immagini/cerenova.jpg"
+        },
+        "10/10": {
+            text: "Ik zie je graag", // "Ti voglio bene" in fiammingo (belga)
+            image: "immagini/belgio.jpg"
+        },
+        "11/10": {
+            text: "Ik hou van jou", // Olandese
+            image: "immagini/amsterdam.jpg"
+        },
+        "12/10": {
+            text: "Amo-te", // Dialetto di Madeira
+            image: "immagini/madeira.jpg"
+        },
+		"13/10": {
+            text: "Amo-te", // Dialetto di Madeira
+            image: "immagini/portosanto.jpg"
+        },
+		"14/10": {
+            text: "Eu te amo", // Portoghese
+            image: "immagini/porto.jpg"
+        },
+        "15/10": {
+            text: "N kre ku bo (capoverdiano)", // Creolo capoverdiano
+            image: "/immagini/finale.jpg"
+        }
+    };
+
+    // Se la data corrente è presente nell'oggetto messages, aggiorna il contenuto
+	
+    if (messages[dateKey]) {
+        document.getElementById("message").textContent = messages[dateKey].text;
+        document.getElementById("image").src = messages[dateKey].image;
+    } 
+
+    // Gestione dell'apertura della busta
+    const envelope = document.querySelector('.envelope-wrapper');
+    envelope.addEventListener('click', () => {
+        envelope.classList.toggle('flap');
+    });
+    </script>
+</body>
+</html>
