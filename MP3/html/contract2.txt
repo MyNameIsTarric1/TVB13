@@ -1,0 +1,157 @@
+> Alessandro Scifoni INF:
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.8.0 <0.9.0;
+
+import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "@openzeppelin/contracts/finance/PaymentSplitter.sol";
+
+contract DomainMarketplace is ERC1155, Ownable, PaymentSplitter {
+    using SafeMath for uint256;
+
+    // Struct per rappresentare un dominio
+    struct Domain {
+        address originalOwner;
+        address currentOwner;
+        bool inSale;
+        uint256 price;
+        uint256 resoldTimes ; //contatore per sapere quante volte il dominio è stato venduto
+    }
+
+    // Mappa per associare un balance ad un address  ** CI SERVE VERAMENTE?
+    mapping(address => uint256) private balances;
+
+    // Mappa per associare l'ID del dominio alla struttura Domain
+    mapping(bytes => Domain) private _domains;
+
+    // Evento emesso quando un dominio viene messo in vendita
+    // indexed è utilizzato per permettere i destinatari di filtrare gli eventi in base al valore del par
+    event DomainForSale(bytes indexed domainId, address indexed seller, uint256 price);
+
+    // Evento emesso quando un dominio è stato venduto per aggiornare la vista dei domini in vendita
+    // Non ho messo il prezzo perchè non interessa più non essendo appunto in vendita ** TEORICAMENTE POTREBBE ESSERE INTERESSANTE SAPERE A QUANTO E' STATO VENDUTO UN DOMINIO
+    event DomainSold(address indexed buyer, bytes indexed domainId);
+
+    // Costruttore del contratto
+    constructor(
+        address initialOwner,
+        address[] memory _payees,
+        uint256[] memory _shares
+
+        /**
+                  initialOwner   newOwner    
+        _payees = ["alessandro", "Andrea"]
+        _shares = ["5", "95"]
+        **/
+    )
+        ERC1155("")
+        PaymentSplitter(_payess, _shares)
+        Ownable(initialOwner) 
+    {}
+
+    function mint(bytes calldata domainId){
+        //Se il dominio passato è libero
+        if (_domains[domainId].originalOwner == address(0)) {
+            purchaseNewDomain(domainId);
+            
+        }
+
+        //Altrimenti devo controllare se il dominio è in vendita
+        else if(_domains[domainId].inSale){
+            address currentOwner = _domains[domainId].currentOwner;
+            purchaseExistingDomain(domainId, currentOwner);
+
+        }else{
+            //errore il dominio è già in uso
+
+        }
+
+    }
+
+    // Funzione per acquistare un dominio ex novo
+    function purchaseNewDomain(bytes calldata domainId) external payable {
+        // Verifica che il creator abbia abbastanza token
+        Domain domainToBuy = _domains[domainId]
+        // Modifica
+        // require(msg.value >= 1 ether, "Insufficient payment");  -->
+        require(msg.value >= domainToBuy.price, "Insufficient payment");
+        // Verifica che il dominio non sia già stato creato
+        // require(domainToBuy.originalOwner == address(0), "Domain already created"); <-- NON SERVE PIU
+
+        // Inserimento dei dati nella struttura
+        _domains[domainId] = Domain(msg.sender,msg.sender, false, 0);
+        resoldTimes++;
+    }
+
+     function purchaseExistingDomain(bytes calldata domainId, address currentOwner) external payable {
+        // Verifica che l'acquirente e il possessore non coincidano
+        require(msg.sender != currentOwner, "You can't buy your own domain");
+
+        // Verifica che l'acquirente abbia abbastanza token
+        require(msg.value >= _domains[domainId].price, "Insufficient payment");
+
+        // Verifica che il domain sia in vendita Serve???? NO NON SERVE LO VERIFICHIAMO PRIMA
+        //require(_domains[domainId].inSale, "Domain not for sale");
+
+        //GESTIONE ROYALTIES
+
+        // royalties
+        uint256 royaltiesAmount = 0;
+
+        // Trasferisce il compenso all'acquirente originale (generatore)
+        if (_domains[domainId].resoldTimes > 1) {
+            // Calcola il compenso per l'acquirente originale (generatore)
+            uint256 royaltiesAmount = msg.value.mul(5).div(100); // 5% di royalty
+            payable(originalOwner).transfer(royaltiesAmount);
+
+            // Emetti l'evento per notificare l'acquirente originale (generatore) delle royalties ricevute
+            emit RoyaltiesPaid(originalOwner, msg.sender, domainId, royaltiesAmount);
+
+
+        uint256 realAmount = _domains[domainId].price-royaltiesAmount;
+        // Trasferisci i token dal compratore al venditore
+        // Per usare safemath bastava using sm for uint256(?)
+        balances[msg.sender] -= ;
+        balances[_domains[domainId].currentOwner] += _domains[domainId].price;
+
+        > Alessandro Scifoni INF:
+        // Trasferisci il dominio al compratore
+        _domains[domainId].currentOwner = msg.sender;
+        _domains[domainId].inSale = false;
+
+        // Emetti l'evento per ricordare di aggiornare la lista dei domini in vendita
+        emit DomainSailed(msg.sender, domainId);
+        resoldTimes++;
+    }
+
+    // Modificatore che richiede che l'utente sia il proprietario del dominio
+    modifier onlyDomainOwner(bytes calldata domainId) {
+        require(msg.sender == _domains[domainId].currentOwner, "Not the domain owner");
+        _;
+    }
+    // TODO? interfaccia frontend con i domini in vendita
+    // Funzione per mettere un dominio in vendita
+    function sellDomain(bytes calldata domainId, uint256 price) external onlyDomainOwner(domainId) {
+        // setta il dominio in vendita
+        _domains[domainId].inSale = true;
+        // evento per notificare gli altri utenti che un certo dominio è in vendita
+        emit DomainForSale(domainId, msg.sender, price);
+    }
+
+   
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

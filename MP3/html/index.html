@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ilaria MP3</title>
+	<link rel="icon" href="../icon/sunflower.png">
+	<link rel="stylesheet" href="../css/style.css">
+	<script src="https://kit.fontawesome.com/6828bd6111.js" crossorigin="anonymous"></script>
+
+	<!-- Per JQuery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+	<div class="container" id="cont">		
+		<div class="testo">
+			<p italic id="frase">Ma tu, tu sei diversa perché sei sbagliata <br>
+				Ma non per me che credo in chi non vien creduta <br>
+				Tu sei come un bicchiere fatto di cristallo <br>
+				Al bordo di una tavola e temi l'impatto</p>
+		</div>
+		
+		<div class="music-player">
+			<img src="" alt="" class="song-img" id="fotoDaMod">
+			<div class="overlay"></div>
+			<h1 id="titolo-canzone">TitoloCanzone</h1>
+			<p id="autore-canzone">Artista</p>
+
+			<audio id="song">
+				<source src="#" type="audio/mpeg" id="daMod">
+			</audio>
+			<input type="range" value="0" id="progress">
+			<div class="controls">
+				<div><i class="fa-solid fa-backward"></i></div>
+				<div onclick="playPause()"><i class="fa-solid fa-play" id="ctrl"></i></div>
+				<div><i class="fa-solid fa-forward"></i></div>
+			</div>			
+		</div>
+		<div>
+			<a id="down" class="download" href="#" download="foto"><i class="fa-solid fa-download"></i></a>
+			<a onclick="switchMode()" class="switch-mode nowSun" id="toggle"><i class="fa-solid fa-moon" id="switch-icon"></i></a>
+
+		</div>
+		
+
+		
+	</div>
+
+	
+<script>
+
+	//================================================ CREO LA MAPPA CON TUTTE LE CANZONI E LE FRASI =======================================
+	const mapDaySong = new Map([
+	//[giorno, {titolo: titolo, frase:frase}]
+	[20, new Map([
+			["titolo","Quel filo che ci unisce"],
+			["autore", "Ultimo"],
+			["frase", "Ma tu, tu sei diversa perché sei sbagliata <br>Ma non per me che credo in chi non vien creduta <br>Tu sei come un bicchiere fatto di cristallo <br>Al bordo di una tavola e temi l'impatto"],
+			["foto", "../img/20.png"]
+		])
+	],
+	[21, new Map([
+			["titolo","Lieto fine"],
+			["autore", "Carl Brave"],
+			["frase", "Il rosso ti dona, la tua vita nuova <br> Cercavo una rogna e mi sei cascata sopra"],
+			["foto", "../img/21.png"]
+		 ])
+	],
+	[22, new Map([
+			["titolo","Red Light"],
+			["autore", "Tedua"],
+			["frase", "Ritorno al tramonto, capisco che in fondo <br> Io e te siamo nella stessa direzione, ma lontani"],
+			["foto", "../img/22.png"]
+		])
+	],
+	[23, new Map([
+		["titolo","Un Altro Mondo"],
+		["autore", "Merk & Kremont, Tananai, Marracash"],
+		["frase", "Baby, lascia chi ti lascia <br> Smetti di cercare un senso <br> Salpa assieme a me verso un altro universo"],
+		["foto", "../img/23.png"]
+	 ])
+	],
+	[24, new Map([
+		["titolo","Bellissimissima <3"],
+		["autore", "Alfa"],
+		["frase", "Dimmi, dimmi cosa che importa, che diventiamo <br> Godiamoci il momento, anche se è un po' strano <br> Passiamo giorni a letto, poi lo sappiamo <br> Che poi finirà così "],
+		["foto", "../img/24.png"]
+	])
+	],
+	[25, new Map([
+		["titolo","Cosa Resterà"],
+		["autore", "Irama"],
+		["frase", "Volevo nascere senza pensieri <br> Senza le crisi di panico quando penso troppo <br> Volevo correre più forte degli altri <br> Come per dimostrarmi che potrei farlo il doppio"],
+		["foto", "../img/25.png"]
+	])
+	],
+	[26, new Map([
+		["titolo","Scudo"],
+		["autore", "Gio Evan"],
+		["frase", "Futuro non è leggere le mani <br> Il futuro è saperle stringere forte"],
+		["foto", "../img/26.png"]
+	])
+	],
+	[27, new Map([
+			["titolo","Ci pensiamo domani"],
+			["autore", "Angelina Mango"],
+			["frase", "E quando ti sveglio e mi guardi così <br> A me basta tutto questo <br> Mi basta restare in silenzio <br> E non ho più voglia di andarmene via, mmh"],
+			["foto", "../img/27.png"]
+	])
+	],
+	[28, new Map([
+			["titolo","Non Litighiamo Più"],
+			["autore", "Rocco Hunt"],
+			["frase", "Tu non ti accorgi quanto bene che mi fai <br> Ho cancellato il nome di quell'altro con lo spray <br> Stasera berrei nei posti più strani <br> Finché non compari sopra il mio display"],
+			["foto", "../img/28.png"]
+	])
+	],
+	[29, new Map([
+			["titolo","5 MINUTI"],
+			["autore", "Alfa"],
+			["frase", "Parliamo nei sogni miei <br>Lasciatemi sognare in pace <br>Ancora cinque minuti in più"],
+			["foto", "../img/29.png"]
+	])
+	],
+	[30, new Map([
+			["titolo","Aeroplani"],
+			["autore", "Eddie Brock"],
+			["frase", "Tu portami dove si vedono gli aeroplani così sognamo di partire insieme<br>Tu portami dove si vedono le stelle dalla città non riesco a vederle bene<br> Tu strappami da questo attacco di panico<br>Dammi un motivo per sentire il mio battito"],
+			["foto", "../img/30.png"]
+	])
+	],
+	[31, new Map([
+			["titolo","Sul finale"],
+			["autore", "Ultimo"],
+			["frase", "Io che non so vivere senza sognare<br>Guardarsi allo specchio e ritrovarsi a volare<br>Lasciatemi un filo dove poter camminare<br>Tenetevi il mondo e lasciatemi il mare"],
+			["foto", "../img/31.png"]
+	])
+	],
+	[1, new Map([
+			["titolo","Vorrei proteggerti dal mondo"],
+			["autore", "Michele Merlo"],
+			["frase", "Te lo ricordi come si fa a volare<br>Basta a non pensare a quello che fa male<br>A volte non ci riesci, vorresti scomparire<br>E poi diventare piccola e scappare al mare"],
+			["foto", "../img/1.png"]
+	])
+	],
+	[2, new Map([
+			["titolo","DOMANI TORNO"],
+			["autore", "AIELLO"],
+			["frase", "Tornassi indietro<br>Vabbè che non si torna indietro mai<br>Ma se potessi farlo adesso giuro<br>Che non ti lascerei neppure un minuto<br>Io non ti lascerei neppure un minuto"],
+			["foto", "../img/2.png"]
+	])
+	]
+]);
+
+	//=============================================== SELEZIONO LA CANZONE DEL GIORNO CORRENTE =============================================
+	
+	var currentDate = new Date();
+	// var day= currentDate.getDate()+3; 
+	var day= 2;
+	var info= mapDaySong.get(day);
+	var audio = document.getElementById("daMod"); 
+	
+	audio.src = "../song/"+day+".mp3";
+	audio.parentNode.load();
+
+	//=============================================== INSERISCO IL TITOLO E L'ARTISTA NELL'APPOSITO SPAZIO =================================
+	// Seleziona l'elemento h1 e modifica il suo contenuto
+	const titoloCanzone = document.getElementById('titolo-canzone');
+	titoloCanzone.innerHTML = info.get("titolo");
+
+	// Seleziona l'elemento p e modifica il suo contenuto
+	const autoreCanzone = document.getElementById('autore-canzone'); 
+	autoreCanzone.innerHTML = info.get("autore");
+
+	//=============================================== SELEZIONO LA FOTO DEL GIORNO CORRENTE =================================
+	var foto = document.getElementById("fotoDaMod");
+	var btn_down = document.getElementById("down");
+	btn_down.href= info.get("foto");
+	btn_down.download="foto del giorno";
+	foto.src = info.get("foto");
+
+	//=============================================== INSERISCO IL TESTO DELLA CANZONE =================================
+	const fraseCanzone = document.getElementById('frase'); 
+	fraseCanzone.innerHTML = info.get("frase");
+
+
+	//PERFETTO FUNZIONA !
+
+
+
+let progress = document.getElementById('progress');
+let song = document.getElementById('song');
+let ctrl = document.getElementById('ctrl');
+	
+
+song.onloadedmetadata=function() {
+	progress.max = song.duration;
+	progress.value = song.currentTime;
+}
+
+function playPause() {
+	if(ctrl.classList.contains("fa-pause")){
+		song.pause();
+		ctrl.classList.remove("fa-pause");
+		ctrl.classList.add("fa-play");
+	}
+	else{
+		song.play();
+		ctrl.classList.add("fa-pause");
+		ctrl.classList.remove("fa-play");
+	} 
+
+}
+if(song.play()){
+	setInterval(()=>{
+		progress.value = song.currentTime;
+	},500);
+}
+
+progress.onchange = function(){
+	song.play();
+	song.currentTime = progress.value
+	ctrl.classList.add("fa-pause");
+	ctrl.classList.remove("fa-play");
+}
+
+
+function switchMode(){
+	let container = document.getElementById("cont");
+	let frase = document.getElementById("frase");
+	let autoreCanzone = document.getElementById("autore-canzone");
+	let titoloCanzone = document.getElementById("titolo-canzone");
+	let icon = document.getElementById("switch-icon");
+
+	if(icon.classList.contains("fa-moon")){
+		icon.classList.remove("fa-moon");
+		icon.classList.add("fa-sun");
+		container.style.backgroundColor = "rgb(125, 66, 19)";
+		frase.style.color="white";
+		autoreCanzone.style.color="white";
+		titoloCanzone.style.color="white";
+
+	}else{
+		icon.classList.add("fa-moon");
+		icon.classList.remove("fa-sun");
+		container.style.backgroundColor = "rgb(254, 198, 151)";
+		frase.style.color="black";
+		autoreCanzone.style.color="black";
+		titoloCanzone.style.color="black";
+	}
+
+	
+}
+
+
+</script>
+</body>
+</html>
