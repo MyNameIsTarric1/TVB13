@@ -1,83 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS Envelope + Letter (Open/Close on Click)</title>
-    <link rel="stylesheet" href="./style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Page</title>
+  <style>
+    /* Reset base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #74ABE2, #5563DE);
+      font-family: 'Arial', sans-serif;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      padding: 40px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+    .container a {
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.25);
+      padding: 15px 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+    .container a:hover {
+      transform: scale(1.05);
+      background: rgba(255, 255, 255, 0.35);
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="envelope-wrapper">
-            <div class="envelope">
-                <div class="letter">
-                    <div class="text">
-                        <strong id="message"></strong>						
-						<img src="" id="image" alt="immagine del giorno">
-                    </div>
-                </div>
-            </div>
-            <div class="heart"></div>
-        </div>
-    </div>
-    <script>
-    // Ottieni la data corrente
-    const today = new Date();
-    const day = ("0" + today.getDate()).slice(-2);
-    const month = ("0" + (today.getMonth() + 1)).slice(-2); // I mesi partono da 0
-    const dateKey = `${day}/${month}`;
-	
-	
-
-    // Definisci i messaggi e le immagini per le date specifiche
-    const messages = {
-        "08/10": {
-            text: "Ich liebe dich", // "Ti voglio bene" in tedesco (austriaco)
-            image: "immagini/vienna.jpg"
-        },
-        "09/10": {
-            text: "Ti voglio bene", // Italiano
-            image: "immagini/cerenova.jpg"
-        },
-        "10/10": {
-            text: "Ik zie je graag", // "Ti voglio bene" in fiammingo (belga)
-            image: "immagini/belgio.jpg"
-        },
-        "11/10": {
-            text: "Ik hou van jou", // Olandese
-            image: "immagini/amsterdam.jpg"
-        },
-        "12/10": {
-            text: "Amo-te", // Dialetto di Madeira
-            image: "immagini/madeira.jpg"
-        },
-		"13/10": {
-            text: "Amo-te", // Dialetto di Madeira
-            image: "immagini/portosanto.jpg"
-        },
-		"14/10": {
-            text: "Eu te amo", // Portoghese
-            image: "immagini/porto.jpg"
-        },
-        "15/10": {
-            text: "N kre ku bo (capoverdiano)", // Creolo capoverdiano
-            image: "immagini/finale.jpg"
-        }
-    };
-
-    // Se la data corrente è presente nell'oggetto messages, aggiorna il contenuto
-	
-    if (messages[dateKey]) {
-        document.getElementById("message").textContent = messages[dateKey].text;
-        document.getElementById("image").src = messages[dateKey].image;
-    } 
-
-    // Gestione dell'apertura della busta
-    const envelope = document.querySelector('.envelope-wrapper');
-    envelope.addEventListener('click', () => {
-        envelope.classList.toggle('flap');
-    });
-    </script>
+  <div class="container">
+    <a href="Madeira/index.html">Madeira</a>
+    <a href="MP3/html/index.html">MP3</a>
+    <a href="lettera.html">TVB</a>
+  </div>
 </body>
 </html>
