@@ -32,7 +32,7 @@ const reasons = [
 	const randomReason = reasons[Math.floor(Math.random() * reasons.length)];
   
 	// Scegli immagine casuale (da 1 a 40)
-	const randomImageNumber = Math.floor(Math.random() * 8) + 1;
+	const randomImageNumber = Math.floor(Math.random() * 26) + 1;
 	const randomImagePath = `images/img${randomImageNumber}.jpg`;
   
 	// Aggiorna testo
