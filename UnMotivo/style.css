@@ -1,0 +1,105 @@
+body {
+	background: linear-gradient(to right, #ffe0e9, #fff);
+	font-family: 'Dancing Script', cursive;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	margin: 0;
+	overflow: hidden;
+	text-align: center;
+	color: #cc3366;
+	position: relative;
+	padding: 20px;
+	box-sizing: border-box;
+  }
+  
+  h1 {
+	font-size: 2.5em;
+	margin-bottom: 20px;
+  }
+  
+  #reason {
+	font-size: 1.8em;
+	margin: 20px;
+	max-width: 600px;
+	opacity: 0;
+	transition: opacity 0.5s ease-in-out;
+	animation: typing 2s steps(30, end) forwards;
+	white-space: nowrap;
+	overflow: hidden;
+	border-right: 2px solid #cc3366;
+  }
+  
+  @keyframes typing {
+	from { width: 0 }
+	to { width: 100% }
+  }
+  
+  button {
+	background-color: #ff6699;
+	border: none;
+	color: white;
+	padding: 15px 30px;
+	margin-top: 30px;
+	font-size: 1.5em;
+	border-radius: 30px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  button:hover {
+	background-color: #ff3366;
+	transform: scale(1.1);
+  }
+  
+  /* Cuoricini */
+  .heart {
+	position: absolute;
+	font-size: 2em;
+	color: #ff6699;
+	animation: float 4s ease-in forwards;
+	pointer-events: none;
+	user-select: none;
+  }
+  
+  @keyframes float {
+	0% {
+	  opacity: 1;
+	  transform: translateY(0) scale(1);
+	}
+	100% {
+	  opacity: 0;
+	  transform: translateY(-800px) scale(0.5);
+	}
+  }
+  
+  /* --- RESPONSIVE --- */
+  @media (max-width: 600px) {
+	h1 {
+	  font-size: 2em;
+	}
+  
+	#reason {
+	  font-size: 1.5em;
+	  white-space: normal;
+	  border-right: none;
+	  animation: fadeIn 1s ease-in-out forwards;
+	}
+  
+	@keyframes fadeIn {
+	  from { opacity: 0; }
+	  to { opacity: 1; }
+	}
+  
+	button {
+	  padding: 12px 24px;
+	  font-size: 1.2em;
+	}
+  
+	.heart {
+	  font-size: 1.5em;
+	}
+  }
+  
