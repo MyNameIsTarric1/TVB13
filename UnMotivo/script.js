@@ -23,14 +23,32 @@ const reasons = [
 	
   ];
   
+
   function showReason() {
-	const reason = reasons[Math.floor(Math.random() * reasons.length)];
 	const reasonDiv = document.getElementById('reason');
-	reasonDiv.style.animation = 'none'; // reset animazione
-	void reasonDiv.offsetWidth; // forza il reflow
-	reasonDiv.style.animation = 'typing 2s steps(30, end) forwards'; // riavvia animazione
+	const image = document.getElementById('image');
+  
+	// Scegli frase casuale
+	const randomReason = reasons[Math.floor(Math.random() * reasons.length)];
+  
+	// Scegli immagine casuale (da 1 a 40)
+	const randomImageNumber = Math.floor(Math.random() * 8) + 1;
+	const randomImagePath = `images/img${randomImageNumber}.jpg`;
+  
+	// Aggiorna testo
+	reasonDiv.style.animation = 'none';
+	void reasonDiv.offsetWidth;
+	reasonDiv.style.animation = 'typing 2s steps(30, end) forwards';
 	reasonDiv.style.opacity = 1;
-	reasonDiv.textContent = reason;
+	reasonDiv.textContent = randomReason;
+  
+	// Aggiorna immagine
+	image.style.opacity = 0;
+	setTimeout(() => {
+	  image.src = randomImagePath;
+	  image.style.display = 'block';
+	  image.style.opacity = 1;
+	}, 500);
   
 	createHeart();
   }

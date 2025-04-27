@@ -102,4 +102,25 @@ body {
 	  font-size: 1.5em;
 	}
   }
+
+  #image {
+	width: 300px; /* Impostiamo una larghezza fissa */
+	height: 300px; /* Impostiamo un'altezza fissa */
+	object-fit: cover; /* Per evitare che l'immagine venga distorta, taglierà i bordi se necessario */
+	margin-top: 20px;
+	border-radius: 20px;
+	box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+	opacity: 0;
+	transition: opacity 0.5s ease-in-out;
+  }
+  
+  /* Responsive per schermi piccoli, ad esempio su dispositivi mobili */
+  @media (max-width: 600px) {
+	#image {
+	  width: 250px; /* Leggermente più piccola su schermi piccoli */
+	  height: 250px;
+	}
+  }
+  
+  
   
