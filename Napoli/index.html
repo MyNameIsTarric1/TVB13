@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Mappa del Tesoro — Napoli</title>
+<title>Mappa del Tesoro - Napoli</title>
 <style>
 /* Theme: parchment / treasure map (mobile-first) */
 :root{--bg:#f6eedc;--paper:#f3e6cc;--ink:#4b2e18;--accent:#c89b3a;--muted:#9e8263;--transition:300ms ease}
@@ -82,7 +82,7 @@ input[type="text"]:focus{border-color:var(--accent);box-shadow:0 6px 18px rgba(1
   <div id="gate" role="dialog" aria-modal="true" aria-label="Accesso protetto">
     <div id="gate-box">
       <div id="gate-icon">🗺️</div>
-      <h2>Mappa del Tesoro — Napoli</h2>
+      <h2>Mappa del Tesoro - Napoli</h2>
       <p>Questa mappa è protetta.<br>Inserisci la parola chiave per sbloccarla.</p>
       <div id="gate-row" class="row">
         <input type="password" id="gate-input" placeholder="Parola chiave..." autocomplete="off" inputmode="text" />
@@ -96,7 +96,7 @@ input[type="text"]:focus{border-color:var(--accent);box-shadow:0 6px 18px rgba(1
     <div class="header">
       <div class="logo" aria-hidden="true">🧭</div>
       <div>
-        <div id="main-title" class="title">Mappa del Tesoro — Napoli</div>
+        <div id="main-title" class="title">Mappa del Tesoro - Napoli</div>
         <div class="subtitle">Segui gli indizi. Ogni tappa si sblocca con la parola giusta.</div>
       </div>
     </div>
@@ -109,34 +109,34 @@ input[type="text"]:focus{border-color:var(--accent);box-shadow:0 6px 18px rgba(1
     <section class="sections" id="sections">
 
       <article class="section" id="intro">
-        <h2>Prologo</h2>
-        <p class="narrative">È una mattina tiepida e il cuore di Napoli ti indica la strada. Sul retro di una vecchia pergamena trovi il primo indizio — inizia il viaggio. Digita la parola che senti nel profumo della città per proseguire.</p>
+        <h2>Buon Compleanno!</h2>
+        <p class="narrative">È una mattina tiepida e il cuore di Napoli ti indica la strada. Sul retro di una vecchia pergamena trovi il primo indizio - inizia il viaggio. Digita la parola che senti nel profumo della città per proseguire.</p>
         <img class="placeholder" id="img-intro" alt="Sugg: scorcio di Napoli, lungomare o una pergamena" />
         <!-- Suggerimento immagine: scorcio del lungomare/vesuvio/pergamena antica -->
         <div class="row" style="margin-top:6px;"><input type="text" id="input-intro" placeholder="Scrivi qui la parola..." inputmode="text" autocomplete="off" /><button class="btn small" data-step="intro" id="btn-intro">Verifica</button></div>
         <div class="feedback" id="fb-intro"></div>
       </article>
 
-      <article class="section hidden" id="step1">
-        <h2>Tappa 1 — Pizza</h2>
-        <p class="narrative">Nel vicolo il profumo ti guida verso una piccola bottega. Il maestro ti sorride e ti dice: «La mia città vive su una base tonda». Qual è la parola che sblocca il forno?</p>
-        <img class="placeholder" id="img-step1" alt="Sugg: pizza napoletana davanti a un forno a legna" />
-        <!-- Suggerimento immagine: pizza margherita, forno a legna, cortile napoletano -->
-        <div class="row"><input type="text" id="input-step1" placeholder="Risposta tappa 1" inputmode="text" /><button class="btn small" data-step="step1" id="btn-step1">Controlla</button></div>
-        <div class="feedback" id="fb-step1"></div>
-      </article>
-
       <article class="section hidden" id="step2">
-        <h2>Tappa 2 — Dolce napoletano</h2>
+        <h2>Tappa 1 - Dolce napoletano</h2>
         <p class="narrative">Tra le piastrelle colorate trovi una pasticceria. Il dolce ti sfida con la sua storia zuccherina. Pronuncia la parola che rimbalza nei vicoli.</p>
         <img class="placeholder" id="img-step2" alt="Sugg: babà sul piatto, vetrina pasticceria" />
         <!-- Suggerimento immagine: babà, sfogliatella, esposizione pasticceria -->
-        <div class="row"><input type="text" id="input-step2" placeholder="Risposta tappa 2" inputmode="text" /><button class="btn small" data-step="step2" id="btn-step2">Controlla</button></div>
+        <div class="row"><input type="text" id="input-step2" placeholder="Risposta tappa 1" inputmode="text" /><button class="btn small" data-step="step2" id="btn-step2">Controlla</button></div>
         <div class="feedback" id="fb-step2"></div>
       </article>
 
+      <article class="section hidden" id="step1">
+        <h2>Tappa 2 - La Tradizione</h2>
+        <p class="narrative">Nel vicolo il profumo ti guida verso una piccola bottega. Il maestro ti sorride e ti dice: «La mia città vive su una base tonda». Qual è la parola che sblocca il forno?</p>
+        <img class="placeholder" id="img-step1" alt="Sugg: pizza napoletana davanti a un forno a legna" />
+        <!-- Suggerimento immagine: pizza margherita, forno a legna, cortile napoletano -->
+        <div class="row"><input type="text" id="input-step1" placeholder="Risposta tappa 2" inputmode="text" /><button class="btn small" data-step="step1" id="btn-step1">Controlla</button></div>
+        <div class="feedback" id="fb-step1"></div>
+      </article>      
+
       <article class="section hidden" id="step3">
-        <h2>Tappa 3 — Caffè</h2>
+        <h2>Tappa 3 - Caffè</h2>
         <p class="narrative">Un bar accogliente: il barman ti porge una tazzina che racconta storie. Ascolta il suo ronzio e digita la parola breve e forte come un battito.</p>
         <img class="placeholder" id="img-step3" alt="Sugg: tazzina di caffè fumante, interno bar" />
         <div class="row"><input type="text" id="input-step3" placeholder="Risposta tappa 3" inputmode="text" /><button class="btn small" data-step="step3" id="btn-step3">Controlla</button></div>
@@ -144,7 +144,7 @@ input[type="text"]:focus{border-color:var(--accent);box-shadow:0 6px 18px rgba(1
       </article>
 
       <article class="section hidden" id="step4">
-        <h2>Tappa 4 — Street food</h2>
+        <h2>Tappa 4 - Street food</h2>
         <p class="narrative">Tra bancarelle e cori, un sapore pop ti sfida: afferra la parola che si nasconde tra i morsi veloci della città.</p>
         <img class="placeholder" id="img-step4" alt="Sugg: cuoppo, frittura, bancarella di strada" />
         <div class="row"><input type="text" id="input-step4" placeholder="Risposta tappa 4" inputmode="text" /><button class="btn small" data-step="step4" id="btn-step4">Controlla</button></div>
@@ -153,8 +153,8 @@ input[type="text"]:focus{border-color:var(--accent);box-shadow:0 6px 18px rgba(1
 
       <article class="section hidden" id="final">
         <div class="final">
-          <h2>Finale — Sotto le luci</h2>
-          <p>Hai seguito ogni passo con leggerezza e cuore. Davanti a te si apre un piccolo spazio dove il tempo sembra fermarsi. Stringi la sua mano e pronuncia l'ultima parola per concludere la mappa.</p>
+          <h2>Finale - Sotto le luci</h2>
+          <p>Hai seguito ogni passo con leggerezza e cuore. Davanti a te si apre un piccolo spazio dove il tempo sembra fermarsi. Pronuncia l'ultima parola per concludere la mappa.</p>
           <img class="placeholder" id="img-final" alt="Sugg: vista notturna del lungomare, tavolino romantico" />
           <div class="row" style="margin-top:12px;"><input type="text" id="input-final" placeholder="Parola finale" inputmode="text" autocomplete="off" /><button class="btn small" data-step="final" id="btn-final">Scopri</button></div>
           <div class="feedback" id="fb-final"></div>
@@ -169,8 +169,16 @@ input[type="text"]:focus{border-color:var(--accent);box-shadow:0 6px 18px rgba(1
 <script>
 // CONFIG: edit keywords or image filenames here
 const config = {
-  order: ['intro','step1','step2','step3','step4','final'],
-  keywords: { intro: 'napoli', step1: 'pizza', step2: 'baba', step3: 'caffe', step4: 'streetfood', final: 'tiamo' },
+  order: ['intro','step2','step1','step3','step4','final'],
+  keywords: { intro: 'napoli', step1: 'pizza', step2: 'baba', step3: 'caffe', step4: 'cuoppo', final: 'ti amo' },
+  successMessages: {
+    intro: "Come al solito mi sono organizzato veramente male con i tempi e non tra un regalo comprato all'ultimo secondo e un bigliettino che dovevo provare a fare all'ultimo momento ho deciso di puntare sulla cosa, forse migliore, che so fare.\n Benvenuta a Napoli - il viaggio inizia! 🗺️",
+    step2: "Penso che in questo periodo la cosa che ci è mancata più di tutti è stata un po' di spensieratezza e perchè no anche un pizzico di dolcezza, ma non quella smielata. Per cui iniziamo la giornata con una bella colazione, con la frolla o il babà e pensiamo soltanto a goderci questa giornata come solo noi sappiamo fare",
+    step1: 'Dopo un anno che mi chiedevi di andare a Napoli per mangiargi una bella pizza, non che quelle mangiate a Roma siano mai state da meno, finalmente siamo qui pronti per gustarcela!🍕',
+    step3: 'Noi il caffè non lo beviamo ma magari possiamo adesso concederci una pausa in qualche vicoletto, se riusciamo al fresco, per stare insieme abbracciati e pensare a tutte le cose belle che dovremo fare e che io non vedo l’ora di fare con te! ☕',
+    step4: "La giornata sta quasi volgendo al termine e sono sicuro che quasi ci dispiace che si sia già fatto tardi, ma non possiamo certo concludere la nostra giornata senza aver assaggiato un bel cuoppo di frittura, magari seduti da qualche parte a guardare il mare da un'altra prospettiva, perchè presto sarà quella della nostra amata Cerenova",
+    final: "Spero che questo bigliettino un po' alternativo ti sia piaciuto, è vero non ci sono dediche sdolcinate o paroloni però ti posso assicurare che, così come quando ti preparo pollo e zucchine, anche dietro pensierini come questo c'è tutto l'amore che ho e spesso non riesco a mostrarti a parole.\nBuon compleanno amore mio, ti amo! ❤️"
+  },
   // imageSuggestions used for placeholder SVG text
   imageSuggestions: {
     intro: 'Scorcio di Napoli / pergamena antica',
@@ -250,7 +258,7 @@ function hideAllExcept(firstId){
   }
 }
 function setFeedback(step,msg,type='error'){const fb=document.getElementById('fb-'+step);if(!fb) return;fb.textContent=msg;fb.className='feedback '+(type==='error'?'error':'success')}
-function verifyStep(step){const inputEl=document.getElementById('input-'+step);const raw=inputEl?inputEl.value:'';const given=normalizeAnswer(raw);const expected=normalizeAnswer(config.keywords[step]||'');if(given===''){setFeedback(step,'Inserisci una risposta per proseguire.','error');return false}if(given===expected){setFeedback(step,'Bravo — tappa sbloccata!','success');return true}else{setFeedback(step,'Quasi… prova ancora.','error');return false}}
+function verifyStep(step){const inputEl=document.getElementById('input-'+step);const raw=inputEl?inputEl.value:'';const given=normalizeAnswer(raw);const expected=normalizeAnswer(config.keywords[step]||'');if(given===''){setFeedback(step,'Inserisci una risposta per proseguire.','error');return false}if(given===expected){setFeedback(step,config.successMessages[step]||'Bravo - tappa sbloccata!','success');return true}else{setFeedback(step,'Quasi… prova ancora.','error');return false}}
 function onCheck(step){const idx=config.order.indexOf(step);if(idx<0) return;const ok=verifyStep(step);if(!ok) return;const next=config.order[idx+1];const currentRevealed=document.querySelectorAll('.sections .section:not(.hidden)').length;updateProgress(currentRevealed+(next?1:0));if(next){revealSection(next);setTimeout(()=>{const ni=document.getElementById('input-'+next);if(ni) ni.focus()},220)}else{document.getElementById('finalMessage').style.display='block'}}
 function attachListeners(){const btns=document.querySelectorAll('button[data-step]');btns.forEach(b=>{b.addEventListener('click',()=>{const s=b.getAttribute('data-step');onCheck(s)})});const inputs=document.querySelectorAll('input[type="text"]');inputs.forEach(inp=>{inp.addEventListener('keyup',(e)=>{if(e.key==='Enter'){const id=inp.id.replace('input-','');onCheck(id)}})});const replay=document.getElementById('replayBtn');if(replay){replay.addEventListener('click',()=>{config.order.forEach(k=>{const inp=document.getElementById('input-'+k);if(inp) inp.value='';setFeedback(k,'','')});hideAllExcept('intro');updateProgress(1);document.getElementById('finalMessage').style.display='none';const i=document.getElementById('input-intro');if(i) i.focus()})}}
 function initGate(){
